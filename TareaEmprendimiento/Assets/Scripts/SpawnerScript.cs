@@ -9,6 +9,7 @@ public class SpawnerScript : MonoBehaviour
 
     public float timeUntilObstacleSpawn;
 
+
     private void Update()
     {
         SpawnLoop();
@@ -31,6 +32,7 @@ public class SpawnerScript : MonoBehaviour
 
         Rigidbody2D obstacleRB = spawnedObstacle.GetComponent<Rigidbody2D>();
         obstacleRB.linearVelocity = Vector2.left * obstacleSpeed;
+    
     }
 
 }

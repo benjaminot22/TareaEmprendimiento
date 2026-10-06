@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -10,14 +11,18 @@ public class PlayerJump : MonoBehaviour
     private Rigidbody2D rb;
     public Animator animator;
 
+    public GameObject GameOver;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameOver.SetActive(false);
+        Time.timeScale = 1;
     }
 
     void Update()
     {
-       
+
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, LongitudRaycast, CapaSuelo);
         Ensuelo = hit.collider != null;
 
@@ -27,7 +32,7 @@ public class PlayerJump : MonoBehaviour
         }
 
         animator.SetBool("Ensuelo", Ensuelo);
-        
+
     }
 
     void OnDrawGizmos()
@@ -40,9 +45,13 @@ public class PlayerJump : MonoBehaviour
     {
         if (other.transform.tag == "Obstacle")
         {
-            Destroy(gameObject);
-            // GameManager Set Game Over
+            GameOver.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
+    public void Reiniciarnivel()
+    {
+        SceneManager.LoadScene("Test");
+    }
 }
